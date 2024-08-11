@@ -1,0 +1,8 @@
+{
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "always",
+		"quickfix.biome": "always",
+		"source.organizeImports": "explicit",
+		"source.organizeImports.biome": "always"
+	}
+}

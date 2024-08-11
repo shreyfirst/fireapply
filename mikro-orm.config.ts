@@ -3,8 +3,8 @@ import { defineConfig } from "@mikro-orm/postgresql";
 import { $env } from "./env";
 
 module.exports = defineConfig({
-	entities: ["./dist/**/*.entity.js"],
-	entitiesTs: ["./src/**/*.entity.ts"],
+	// entities: ["./dist/**/*.entity.js"],
+	entitiesTs: ["./src/server/**/*.entity.ts"],
 	extensions: [Migrator],
 	dbName: $env.DB_NAME,
 	user: $env.DB_USER,
