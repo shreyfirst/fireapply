@@ -1,0 +1,26 @@
+version: '3.9'
+
+name: olive-database
+
+services:
+    postgres:
+        image: postgres:16
+        ports:
+            - 5432:5432
+        volumes:
+            - ~/apps/postgres:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=${DB_PASS}
+            - POSTGRES_USER=${DB_USER}
+            - POSTGRES_DB=${DB_NAME}
+        labels:
+            description: 'PostgreSQL database for the Olive API'
+
+    redis:
+        image: redis/redis-stack:latest
+        ports:
+            - '9000:9000'
+        command: redis-server --port 9000 --loglevel notice --requirepass ${CACHE_PASS} --loadmodule /opt/redis-stack/lib/redisearch.so --loadmodule /opt/redis-stack/lib/rejson.so
+
+x-project-metadata:
+    description: 'Docker Compose configuration for the Olive database'
