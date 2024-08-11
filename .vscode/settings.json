@@ -4,5 +4,6 @@
 		"quickfix.biome": "always",
 		"source.organizeImports": "explicit",
 		"source.organizeImports.biome": "always"
-	}
+	},
+	"editor.defaultFormatter": "biomejs.biome"
 }
