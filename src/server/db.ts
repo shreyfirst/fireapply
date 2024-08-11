@@ -1,6 +1,6 @@
 type User = { id: string; name: string };
 
-// Imaginary database
+// fake local db
 const users: User[] = [];
 export const db = {
 	user: {

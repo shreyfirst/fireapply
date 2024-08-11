@@ -1,8 +1,5 @@
-import http from "node:http";
-/**
- * This a minimal tRPC server
- */
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
+import http from "node:http";
 import { renderTrpcPanel } from "trpc-panel";
 import { z } from "zod";
 import { db } from "./db.js";
