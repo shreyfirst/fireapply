@@ -1,9 +1,16 @@
 import type { CreateFastifyContextOptions } from "@trpc/server/adapters/fastify"
+import { verifyToken } from "./helpers/auth"
 
-export function createContext({ req, res }: CreateFastifyContextOptions) {
-	const user = { name: req.headers.username ?? "anonymous" }
+export async function createContext({ req, res }: CreateFastifyContextOptions) {
+	let user = null
+	const em = req.em
 
-	return { req, res, user }
+	const token = req.headers.authorization?.split(" ")[1]
+	if (token) {
+		user = await verifyToken(token, em)
+	}
+
+	return { user, em }
 }
 
 export type Context = Awaited<ReturnType<typeof createContext>>

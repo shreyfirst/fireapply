@@ -1,13 +1,9 @@
 import cors from "@fastify/cors"
-import {
-	type FastifyTRPCPluginOptions,
-	fastifyTRPCPlugin,
-} from "@trpc/server/adapters/fastify"
 import type { FastifyPluginAsync } from "fastify"
 import fp from "fastify-plugin"
+import { renderTrpcPanel } from "trpc-panel"
 import { $env } from "../../../../env"
-import { type AppRouter, appRouter } from "../../router"
-import { createContext } from "../context"
+import { appRouter } from "../../router"
 
 const dev: FastifyPluginAsync = async (fastify) => {
 	if (!$env.isDev) return
@@ -16,16 +12,13 @@ const dev: FastifyPluginAsync = async (fastify) => {
 		origin: ["http://localhost:3000"],
 	})
 
-	await fastify.register(fastifyTRPCPlugin, {
-		prefix: "/trpc",
-		trpcOptions: {
-			router: appRouter,
-			createContext,
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-			onError({ path, error }: any) {
-				console.error(`Error in tRPC handler on path '${path}':`, error)
-			},
-		} as FastifyTRPCPluginOptions<AppRouter>["trpcOptions"],
+	await fastify.get("/panel", async (req, res) => {
+		res.type("text/html").send(
+			renderTrpcPanel(appRouter, {
+				url: "http://localhost:3000/trpc",
+				transformer: "superjson",
+			}),
+		)
 	})
 }
 

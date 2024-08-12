@@ -1,9 +1,5 @@
-import { initTRPC } from "@trpc/server"
 import userRouter from "./modules/user/user.router"
-
-const t = initTRPC.create()
-export const router = t.router
-export const publicProcedure = t.procedure
+import { router } from "./trpc"
 
 export const appRouter = router({
 	...userRouter,
