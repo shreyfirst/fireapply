@@ -1,11 +1,11 @@
 /**
  * This is the client-side code that uses the inferred types from the server
  */
-import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
+import { createTRPCProxyClient, httpBatchLink } from "@trpc/client"
 /**
  * We only import the `AppRouter` type from the server - this is not available at runtime
  */
-import type { AppRouter } from "../server/index.js";
+import type { AppRouter } from "../server/router.js"
 
 // Initialize the tRPC client
 const trpc = createTRPCProxyClient<AppRouter>({
@@ -14,7 +14,7 @@ const trpc = createTRPCProxyClient<AppRouter>({
 			url: "http://localhost:3000",
 		}),
 	],
-});
+})
 
 // Call procedure functions
 
@@ -22,12 +22,13 @@ const trpc = createTRPCProxyClient<AppRouter>({
 // - hover any types below to see the inferred types
 // - Cmd/Ctrl+click on any function to jump to the definition
 // - Rename any variable and see it reflected across both frontend and backend
-const users = await trpc.user.list.query();
 
-const createdUser = await trpc.user.create.mutate({ name: "sachinraja" });
-//    ^?
-console.log("Created user:", createdUser);
+// const users = await trpc.user.list.query();
 
-const user = await trpc.user.byId.query("1");
-//    ^?
-console.log("User 1:", user);
+// const createdUser = await trpc.user.create.mutate({ name: "sachinraja" });
+// //    ^?
+// console.log("Created user:", createdUser);
+
+// const user = await trpc.user.byId.query("1");
+// //    ^?
+// console.log("User 1:", user);
