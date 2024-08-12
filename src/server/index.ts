@@ -5,6 +5,7 @@ import {
 import fastify from "fastify"
 import { createContext } from "./lib/context"
 import dev from "./lib/middleware/dev"
+import mikrorm from "./lib/middleware/mikrorm"
 import { type AppRouter, appRouter } from "./router"
 
 export const server = fastify({
@@ -26,8 +27,9 @@ const main = async (): Promise<void> => {
 
 	await server.register(dev)
 
-	await server.ready()
+	await server.register(mikrorm)
 
+	await server.ready()
 	server.listen({ port: 3000 })
 }
 main().catch((error) => {

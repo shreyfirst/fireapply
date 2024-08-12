@@ -5,7 +5,7 @@ import {
 	hashPassword,
 } from "../../lib/helpers/auth"
 import { publicProcedure, router } from "../../trpc"
-import { User } from "./user.model"
+import { User } from "./user.entity"
 
 export default {
 	user: router({
@@ -42,5 +42,10 @@ export default {
 				const token = await generateToken(user)
 				return { token }
 			}),
+		get: publicProcedure.query(async ({ ctx }) => {
+			return {
+				user: ctx.user,
+			}
+		}),
 	}),
 }

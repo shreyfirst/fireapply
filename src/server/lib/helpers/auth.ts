@@ -1,7 +1,7 @@
 import type { EntityManager } from "@mikro-orm/postgresql"
 import bcrypt from "bcrypt"
 import jwt from "jwt-simple"
-import { User } from "../../modules/user/user.model"
+import { User } from "../../modules/user/user.entity"
 
 const SECRET_KEY = "your_secret_key_here" // Store this securely, preferably in an environment variable
 

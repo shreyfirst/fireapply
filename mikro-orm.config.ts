@@ -1,10 +1,13 @@
-import { Migrator } from "@mikro-orm/migrations";
-import { defineConfig } from "@mikro-orm/postgresql";
-import { $env } from "./env";
+import { Migrator } from "@mikro-orm/migrations"
+import { defineConfig } from "@mikro-orm/postgresql"
+import { TsMorphMetadataProvider } from "@mikro-orm/reflection"
+import { $env } from "./env"
 
 module.exports = defineConfig({
-	// entities: ["./dist/**/*.entity.js"],
-	entitiesTs: ["./src/server/**/*.entity.ts"],
+	entities: ["./src/**/*.entity.js"],
+	entitiesTs: ["./src/**/*.entity.ts"],
+	tsNode: true,
+	metadataProvider: TsMorphMetadataProvider,
 	extensions: [Migrator],
 	dbName: $env.DB_NAME,
 	user: $env.DB_USER,
@@ -14,4 +17,4 @@ module.exports = defineConfig({
 	migrations: {
 		path: "./migrations",
 	},
-});
+})
