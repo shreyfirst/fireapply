@@ -1,7 +1,6 @@
 import type { FastifyPluginAsync, FastifyRequest } from "fastify"
 import fp from "fastify-plugin"
-import { User } from "../../modules/users/user.entity"
-import { validateSession } from "../redis/sessions"
+import type { User } from "../../modules/users/user.entity"
 
 declare module "fastify" {
 	interface FastifyRequest {
@@ -32,24 +31,25 @@ const auth: FastifyPluginAsync = async (fastify) => {
 		if (authHeaderSplit && authHeaderSplit.length === 2) {
 			const token = authHeaderSplit[1]
 			if (token.length === 64) {
-				const redisSession = await validateSession(request.server.redis, token)
-				if (redisSession) {
-					const user = await request.em
-						.getRepository(User)
-						.findOneOrFail({
-							id: redisSession,
-						})
-						.then((res) => {
-							return res
-						})
-						.catch(() => {
-							throw new Error()
-						})
-					request.user = user
+				// const redisSession = await validateSession(request.server.redis, token)
+				// if (redisSession) {
+				// 	const user = await request.em
+				// 		.getRepository(User)
+				// 		.findOneOrFail({
+				// 			id: redisSession,
+				// 		})
+				// 		.then((res) => {
+				// 			return res
+				// 		})
+				// 		.catch(() => {
+				// 			throw new Error()
+				// 		})
+				// 	request.user = user
 				}
 			}
 		}
-	})
+}
+)
 }
 
 export default fp(auth)

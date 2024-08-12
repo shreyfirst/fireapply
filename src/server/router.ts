@@ -1,15 +1,12 @@
 import { initTRPC } from "@trpc/server"
+import userRouter from "./modules/user/user.router"
 
 const t = initTRPC.create()
 export const router = t.router
 export const publicProcedure = t.procedure
 
 export const appRouter = router({
-	user: router({
-		hello: publicProcedure.query(async () => {
-			return "world"
-		}),
-	}),
+	...userRouter,
 })
 
 export type AppRouter = typeof appRouter
