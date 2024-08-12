@@ -9,7 +9,7 @@ Getting started is easy. Just follow these steps:
 1. **Clone the repository** to your local machine.
 
 2. **Set up your environment variables**:
-   - Copy the `.env.example` file and rename it to `.env`.
+   - Use `.env.local` for any env variables
    - Fill in the values (we'll explain more about this later).
 
 3. **Start the Docker containers**:
@@ -71,7 +71,7 @@ It's a great way to familiarize yourself with the API without writing any code!
 
 We use `envalid` for type-safe environment variables:
 
-1. Environment variables are defined in the `.env` file.
+1. Environment variables are defined in the `env.ts` file. We use `dotenv` to connect the env.ts to your .env.* files (which has the actual data)
 2. We access them using `$env` throughout the codebase. For example:
    ```typescript
    import { $env } from './env';
