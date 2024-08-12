@@ -12,6 +12,8 @@ Getting started is easy. Just follow these steps:
    - Use `.env.local` for any env variables
    - Fill in the values (we'll explain more about this later).
 
+3. **Install node modules:** Run `npm install` in the root directory
+
 3. **Start the Docker containers**:
    ```
    npm run docker:up
