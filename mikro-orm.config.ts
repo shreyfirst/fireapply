@@ -11,6 +11,7 @@ module.exports = defineConfig({
 	extensions: [Migrator],
 	dbName: $env.DB_NAME,
 	user: $env.DB_USER,
+	host: $env.DB_HOST,
 	password: $env.DB_PASS,
 	logger: console.log.bind(console),
 	debug: true,

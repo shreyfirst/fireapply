@@ -4,6 +4,7 @@ import {
 } from "@trpc/server/adapters/fastify"
 import fastify from "fastify"
 import { createContext } from "./lib/context"
+import bullmq from "./lib/middleware/bullmq"
 import dev from "./lib/middleware/dev"
 import mikrorm from "./lib/middleware/mikrorm"
 import { type AppRouter, appRouter } from "./router"
@@ -26,7 +27,7 @@ const main = async (): Promise<void> => {
 	})
 
 	await server.register(dev)
-
+	await server.register(bullmq)
 	await server.register(mikrorm)
 
 	await server.ready()

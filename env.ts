@@ -6,6 +6,10 @@ export const $env = cleanEnv(process.env, {
 	DB_USER: str(),
 	DB_PASS: str(),
 	DB_PORT: str(),
+	DB_HOST: str(),
+	CACHE_PASS: str(),
+	CACHE_HOST: str(),
+	CACHE_PORT: str(),
 })
 
 // $env.isProduction // true if NODE_ENV === 'production'

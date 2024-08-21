@@ -13,6 +13,12 @@ services:
             - POSTGRES_DB=${DB_NAME}
         labels:
             description: 'PostgreSQL database for the Fireapply API'
+    redis:
+        image: redis/redis-stack:latest
+        ports:
+            - '9000:9000'
+        command: redis-server --port 9000 --loglevel notice --requirepass ${CACHE_PASS} --loadmodule /opt/redis-stack/lib/redisearch.so --loadmodule /opt/redis-stack/lib/rejson.so
+
 
 x-project-metadata:
     description: 'Docker Compose configuration for the Fireapply database'
