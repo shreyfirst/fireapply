@@ -69,9 +69,10 @@ const bullmq: FastifyPluginAsync = async (fastify) => {
 			},
 		)
 
-		// serverAdapter.setBasePath("/panel/queues")
+		serverAdapter.setBasePath("/panel/queues")
 		fastify.register(serverAdapter.registerPlugin(), {
 			basePath: "/panel/queues",
+			prefix: "/panel/queues",
 		})
 
 		// Shut down the connection and workers when closing the app
