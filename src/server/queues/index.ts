@@ -1,43 +1,52 @@
-import type { Processor, QueueOptions, WorkerOptions } from "bullmq"
+import type { Processor, QueueOptions, WorkerOptions } from "bullmq";
 
 export interface WorkerConfig {
-	processor: Processor
-	options: Omit<WorkerOptions, "connection">
+  processor: Processor;
+  options: Omit<WorkerOptions, "connection">;
 }
 
 export interface QueueConfig {
-	options: Omit<QueueOptions, "connection">
-	workers: Record<string, WorkerConfig>
+  options: Omit<QueueOptions, "connection">;
+  workers: Record<string, WorkerConfig>;
 }
 
 export type QueueMap = {
-	ApprovalQueue: QueueConfig
-	EmailQueue: QueueConfig
-}
+  ApprovalQueue: QueueConfig;
+  EmailQueue: QueueConfig;
+};
 
 const queues: QueueMap = {
-	ApprovalQueue: {
-		options: {},
-		workers: {
-			approvalWorker: {
-				processor: async (job) => {
-					return "hello"
-				},
-				options: {},
-			},
-		},
-	},
-	EmailQueue: {
-		options: {},
-		workers: {
-			approvalWorke: {
-				processor: async (job) => {
-					return "hello"
-				},
-				options: {},
-			},
-		},
-	},
-}
+  ApprovalQueue: {
+    options: {},
+    workers: {
+      approvalWorker: {
+        processor: async (job) => {
+          return "hello";
+        },
+        options: {},
+      },
+    },
+  },
+  EmailQueue: {
+    options: {},
+    workers: {
+      emailProcessor: {
+        processor: async (job) => {
+          const { from, to, subject, textBody, htmlBody } = job.data;
+          console.log(`Processesing email from ${from} to ${to}`);
 
-export default queues
+          return { processed: true };
+        },
+        options: {},
+      },
+      approvalWorke: {
+        processor: async (job) => {
+          return "hello";
+        },
+        options: {},
+      },
+    },
+  },
+};
+
+export default queues;
